@@ -5,9 +5,9 @@ package com.mindstar.common.utility.math;
  *
  * This counter is initialized with 2 integers:
  * the number to start counting from (threshold), and the number we count to (ceiling).
- * For instance, say we wanted to count from 0 to 25, we initialize the counter thus: <code>ModuloCounter counter = new ModuloCounter(0,25);</code>.
- * Calling counter.init() would set the counter to 0. Calling <code>counter.increment()</code> would increment the counter by 1.
- * Once the counter reaches 25, calling <code>counter.increment()</code> would wrap it around right back to 0.
+ * For instance, say we wanted to count from 0 to 25, we initialize the counter thus: <code>{@link #ModuloCounter} counter = new {@link #ModuloCounter}(0,25)</code>.
+ * Calling {@link #init} would set the counter to 0. Calling {@link #increment} would increment the counter by 1.
+ * Once the counter reaches 25, calling {@link #increment} would wrap it around right back to 0.
  *
  */
 public class ModuloCounter {
