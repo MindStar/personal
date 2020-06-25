@@ -220,7 +220,7 @@ class ModuloCounterTest {
 		counter.moveTo(6);
 		counter.decrementBy(3);
 
-		assertEquals(3, counter.getCurrent(), "decrement() is broken");
+		assertEquals(3, counter.getCurrent(), "decrementBy() is broken");
 	}
 
 	@Test
@@ -228,7 +228,7 @@ class ModuloCounterTest {
 		ModuloCounter counter = new ModuloCounter(2, 7);
 		counter.decrementBy(2);
 
-		assertEquals(6, counter.getCurrent(), "decrement() is broken");
+		assertEquals(6, counter.getCurrent(), "decrementBy() is not wrapping around");
 	}
 
 }
