@@ -2,18 +2,14 @@ package com.mindstar.common.utility.math;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 /**
  * Created by M Waldner on 6/24/2020.
  */
 class ModuloCounterTest {
-
-	private static List<ModuloCounter> countersUnderTest = new ArrayList<>();
 
 	@Test
 	void counterInitializesToThreshold() {
@@ -30,7 +26,7 @@ class ModuloCounterTest {
 				"Expected IllegalArgumentException to be thrown"
 		);
 
-		assertTrue(thrown.getMessage().equals("Ceiling must be greater than threshold."));
+		assertEquals("Ceiling must be greater than threshold.", thrown.getMessage());
 	}
 
 	@Test
@@ -130,37 +126,34 @@ class ModuloCounterTest {
 
 	@Test
 	void attemptingToMoveTimerToPositionGreaterThanCeilingThrowsException() {
-		for (ModuloCounter counter : countersUnderTest) {
-			IllegalArgumentException thrown = assertThrows(
-					IllegalArgumentException.class,
-					() -> counter.moveTo(21),
-					"Expected IllegalArgumentException to be thrown"
-			);
+		ModuloCounter counter = new ModuloCounter(2, 7);
+		IllegalArgumentException thrown = assertThrows(
+				IllegalArgumentException.class,
+				() -> counter.moveTo(21),
+				"Expected IllegalArgumentException to be thrown"
+		);
 
-			assertTrue(thrown.getMessage().equals("Can only move counter to a number between the threshold and the ceiling."));
-		}
+		assertEquals("Can only move counter to a number between the threshold and the ceiling.", thrown.getMessage());
 	}
 
 	@Test
 	void attemptingToMoveTimerToPositionLessThanThresholdThrowsException() {
-		for (ModuloCounter counter : countersUnderTest) {
-			IllegalArgumentException thrown = assertThrows(
-					IllegalArgumentException.class,
-					() -> counter.moveTo(2),
-					"Expected IllegalArgumentException to be thrown"
-			);
+		ModuloCounter counter = new ModuloCounter(3, 7);
+		IllegalArgumentException thrown = assertThrows(
+				IllegalArgumentException.class,
+				() -> counter.moveTo(2),
+				"Expected IllegalArgumentException to be thrown"
+		);
 
-			assertTrue(thrown.getMessage().equals("Can only move counter to a number between the threshold and the ceiling."));
-		}
+		assertEquals("Can only move counter to a number between the threshold and the ceiling.", thrown.getMessage());
 	}
 
 	@Test
 	void canFastForwardToMax() {
-		for (ModuloCounter counter : countersUnderTest) {
-			counter.fastForwardToMax();
+		ModuloCounter counter = new ModuloCounter(2, 7);
+		counter.fastForwardToMax();
 
-			assertEquals(counter.getCeiling(), counter.getCurrent(), "fastForwardToMax() is broken");
-		}
+		assertEquals(counter.getCeiling(), counter.getCurrent(), "fastForwardToMax() is broken");
 	}
 
 	@Test
